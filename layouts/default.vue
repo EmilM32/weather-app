@@ -22,6 +22,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  background-image: linear-gradient(135deg, #527B92 0%, #77ABB0 100%);
 }
 
 *,
