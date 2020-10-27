@@ -1,0 +1,11 @@
+{
+  "days": {
+    "SUN": "Sunday",
+    "MON": "Monday",
+    "TUES": "Tuesday",
+    "WED": "Wednesday",
+    "THURS": "Thursday",
+    "FRI": "Friday",
+    "SAT": "Saturday"
+  }
+}

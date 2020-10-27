@@ -2,12 +2,13 @@
 - Project name: weather-app
 - Programming language: TypeScript
 - Package manager: Npm
-- UI framework: Vuesax
+- UI framework: Vuetify
 - Nuxt.js modules: Axios
 - Testing framework: Jest
 - Rendering mode: Universal (SSR / SSG)
 - Deployment target: Server (Node.js hosting)
 
+- [UI inspiration](https://dribbble.com/shots/6523583-Weather-widget-post-metro-ui-variation)
 ## Build Setup
 
 ```bash

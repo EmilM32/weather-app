@@ -1,0 +1,11 @@
+{
+  "days": {
+    "SUN": "Niedziela",
+    "MON": "Poniedziałek",
+    "TUES": "Wtorek",
+    "WED": "Środa",
+    "THURS": "Czwartek",
+    "FRI": "Piątek",
+    "SAT": "Sobota"
+  }
+}
