@@ -7,5 +7,19 @@
     "THURS": "Czwartek",
     "FRI": "Piątek",
     "SAT": "Sobota"
+  },
+  "months": {
+    "JAN": "Styczeń",
+    "FEB": "Luty",
+    "MAR": "Marzec",
+    "APR": "Kwiecień",
+    "MAY": "Maj",
+    "JUN": "Czerwiec",
+    "JUL": "Lipiec",
+    "AUG": "Sierpień",
+    "SEP": "Wrzesień",
+    "OCT": "Październik",
+    "NOV": "Listopad",
+    "DEC": "Grudzień"
   }
 }
