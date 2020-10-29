@@ -2,7 +2,7 @@
   <div class="d-flex justify-center">
     <v-row no-gutters>
       <v-col align="center" cols="12">
-        <span class="display-2 day">{{ $t(dates.dayTranslation) }}</span>
+        <span class="display-2">{{ $t(dates.dayTranslation) }}</span>
       </v-col>
       <v-col align="center" cols="12">
         <span class="subtitle-2 date">
@@ -50,9 +50,6 @@ export default class Main extends Vue {
 }
 </script>
 <style lang="sass" scoped>
-.day
-  font-family: "Montserrat"!important
-
 .date
   opacity: .7
 </style>
