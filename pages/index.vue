@@ -1,55 +1,35 @@
 <template>
   <div class="d-flex justify-center">
-    <v-row no-gutters>
-      <v-col align="center" cols="12">
-        <span class="display-2">{{ $t(dates.dayTranslation) }}</span>
-      </v-col>
-      <v-col align="center" cols="12">
-        <span class="subtitle-2 date">
-          {{ $t(dates.monthTranslation) }} {{ dates.dateOfMonth }}
-        </span>
-      </v-col>
-      <v-col>
-        <v-row align-content="end">
-          <v-spacer />
-          <TempBox
-            :temperature="5"
-            :small="true"
-            title="MIN"
-          />
-          <TempBox :temperature="15" />
-          <TempBox
-            :temperature="5"
-            :small="true"
-            title="MAX"
-          />
-          <v-spacer />
-        </v-row>
-      </v-col>
-      <v-col align="center" cols="12">
-        <v-icon style="font-size: 15rem">mdi-weather-cloudy</v-icon>
-      </v-col>
-    </v-row>
-    <!-- <v-btn @click="clickMe('pl')">pl</v-btn>
-      <v-btn @click="clickMe('en')">en</v-btn> -->
+    <WeatherView :weather="weather" v-if="!loadingData" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { Dates } from "@/logic/dates";
-import TempBox from "@/components/TempBox.vue";
+import { Coords, Weather } from "@/interfaces/Weather";
+import { WeatherData } from "@/network/weather";
 
 @Component
 export default class Main extends Vue {
-  dates = new Dates("days", "months");
+  weatherData = new WeatherData();
 
-  clickMe(locale: string): void {
-    this.$i18n.setLocale(locale);
+  weather!: Weather;
+  loadingData = true;
+
+  mounted() {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const userCoords: Coords = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+        this.weather = await this.weatherData.downloadData(userCoords);
+        this.loadingData = false;
+      },
+      (error) => {
+        throw new Error(error.message);
+      }
+    );
   }
 }
 </script>
-<style lang="sass" scoped>
-.date
-  opacity: .7
-</style>
