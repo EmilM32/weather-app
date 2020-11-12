@@ -13,15 +13,11 @@
       <v-row align-content="end">
         <v-spacer />
         <TempBox
-          :temperature="weather.main.temp_min.toFixed(1)"
-          :small="true"
-          title="MIN"
-        />
-        <TempBox :temperature="weather.main.temp.toFixed(1)" />
-        <TempBox
-          :temperature="weather.main.temp_max.toFixed(1)"
-          :small="true"
-          title="MAX"
+          v-for="temp in tempBoxes"
+          :key="temp.key"
+          :temperature="`${weather.main[temp.key].toFixed(1)}`"
+          :small="!!temp.title"
+          :title="temp.title ? temp.title : ''"
         />
         <v-spacer />
       </v-row>
@@ -37,10 +33,28 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 import { Dates } from "@/logic/dates";
 import { Weather } from "@/interfaces/Weather";
 
+interface SingleTempBox {
+  key: string;
+  title?: string;
+}
+
 @Component
 export default class WeatherView extends Vue {
   @Prop({ required: true }) weather!: Weather;
   dates = new Dates("days", "months");
+  tempBoxes: Array<SingleTempBox> = [
+    {
+      key: "temp_min",
+      title: "MIN",
+    },
+    {
+      key: "temp",
+    },
+    {
+      key: "temp_max",
+      title: "MAX",
+    },
+  ];
 }
 </script>
 <style lang="sass" scoped>

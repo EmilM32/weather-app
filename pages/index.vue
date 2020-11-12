@@ -13,23 +13,33 @@ import { WeatherData } from "@/network/weather";
 export default class Main extends Vue {
   weatherData = new WeatherData();
 
-  weather!: Weather;
+  weather?: Weather;
   loadingData = true;
 
   mounted() {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const userCoords: Coords = {
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        };
-        this.weather = await this.weatherData.downloadData(userCoords);
-        this.loadingData = false;
-      },
-      (error) => {
-        throw new Error(error.message);
-      }
-    );
+    const storeData = this.$store.getters["weather/weatherData"];
+    console.log("storedata", storeData);
+    if (storeData) {
+      console.log("if", storeData);
+      this.weather = storeData;
+      this.loadingData = false;
+    } else {
+      console.log("else");
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const userCoords: Coords = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          };
+          this.weather = await this.weatherData.downloadData(userCoords);
+          this.loadingData = false;
+          this.$store.commit("weather/insertWeatherData", this.weather);
+        },
+        (error) => {
+          throw new Error(error.message);
+        }
+      );
+    }
   }
 }
 </script>
