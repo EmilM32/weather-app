@@ -1,45 +1,44 @@
 <template>
   <div class="d-flex justify-center">
-    <WeatherView :weather="weather" v-if="!loadingData" />
+    <WeatherView :weather="weather" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator";
+import { Vue, Component, Watch } from "nuxt-property-decorator";
 import { Coords, Weather } from "@/interfaces/Weather";
 import { WeatherData } from "@/network/weather";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters({
+      weather: "weather/weatherData",
+    }),
+  },
+})
 export default class Main extends Vue {
+  [x: string]: any;
   weatherData = new WeatherData();
 
-  weather?: Weather;
-  loadingData = true;
+  weather!: Weather;
 
-  mounted() {
-    const storeData = this.$store.getters["weather/weatherData"];
-    console.log("storedata", storeData);
-    if (storeData) {
-      console.log("if", storeData);
-      this.weather = storeData;
-      this.loadingData = false;
-    } else {
-      console.log("else");
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const userCoords: Coords = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          };
-          this.weather = await this.weatherData.downloadData(userCoords);
-          this.loadingData = false;
-          this.$store.commit("weather/insertWeatherData", this.weather);
-        },
-        (error) => {
-          throw new Error(error.message);
-        }
-      );
+  @Watch("$geolocation.coords", { immediate: true, deep: true })
+  onLoadingChanged(val: boolean, newVal: boolean) {
+    if (this.$geolocation.coords) {
+      const userCoords: Coords = {
+        lat: this.$geolocation.coords.latitude,
+        lon: this.$geolocation.coords.longitude,
+      };
+
+      if (!this.weather.weather.length) this.getWeather(userCoords);
     }
+  }
+
+  async getWeather(coords: Coords): Promise<void> {
+    const weather = await this.weatherData.downloadData(coords);
+
+    this.$store.commit("weather/insertWeatherData", weather);
   }
 }
 </script>

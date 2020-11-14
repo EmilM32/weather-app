@@ -32,8 +32,12 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    "nuxt-i18n"
+    "nuxt-i18n",
+    "vue-geolocation-api/nuxt"
   ],
+  geolocation: {
+    watch: true
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
