@@ -5,40 +5,14 @@
       {{ description[$i18n.locale] }}
     </SpanBlock>
     <v-row>
-      <v-col>
-        <SpanBlock>
-          {{ $t("weatherInfo.feelsLike") }}
-        </SpanBlock>
-        <SpanBlock>
-          {{ feelsLike.toFixed(1) }}
-          <v-icon style="font-size: 1rem !important"
-            >mdi-temperature-celsius</v-icon
-          >
-        </SpanBlock>
-      </v-col>
-      <v-col>
-        <SpanBlock>
-          {{ $t("weatherInfo.humidity") }}
-        </SpanBlock>
-        <SpanBlock> {{ humidity }}% </SpanBlock>
-      </v-col>
-      <v-col>
-        <SpanBlock>
-          {{ $t("weatherInfo.pressure") }}
-        </SpanBlock>
-        <SpanBlock> {{ pressure }}hpa </SpanBlock>
-      </v-col>
-      <v-col>
-        <SpanBlock>
-          {{ $t("weatherInfo.wind") }}
-        </SpanBlock>
-        <SpanBlock> {{ windSpeed }}m/s {{ windDirection.direction }}</SpanBlock>
-      </v-col>
-      <v-col>
-        <SpanBlock>
-          {{ $t("weatherInfo.cloudiness") }}
-        </SpanBlock>
-        <SpanBlock> {{ cloudiness }}% </SpanBlock>
+      <v-col v-for="data in weatherInfo" :key="data.title">
+        <WeatherInfoSingle
+          :title="data.title"
+          :value="data.value"
+          :unit="data.unit"
+          :icon="data.icon"
+          :wind-direction="data.windDirection"
+        />
       </v-col>
     </v-row>
   </div>
@@ -47,6 +21,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
 import { WindDirections } from "@/logic/windDirections";
+import { SingleWeatherInfo } from "./WeatherInfoSingle.vue";
+
 @Component
 export default class WeatherInfo extends Vue {
   @Prop({ required: true }) icon!: string;
@@ -58,7 +34,36 @@ export default class WeatherInfo extends Vue {
   @Prop({ required: true }) windDeg!: number;
   @Prop({ required: true }) cloudiness!: number;
 
-  windDirection: WindDirections = new WindDirections(this.windDeg);
+  windDirection: string = new WindDirections(this.windDeg).direction;
+
+  weatherInfo: Array<SingleWeatherInfo> = [
+    {
+      title: this.$t("weatherInfo.feelsLike"),
+      value: this.feelsLike,
+      icon: "mdi-temperature-celsius",
+    },
+    {
+      title: this.$t("weatherInfo.humidity"),
+      value: this.humidity,
+      unit: "%",
+    },
+    {
+      title: this.$t("weatherInfo.pressure"),
+      value: this.pressure,
+      unit: "hpa",
+    },
+    {
+      title: this.$t("weatherInfo.wind"),
+      value: this.windSpeed,
+      unit: "m/s",
+      windDirection: this.windDirection,
+    },
+    {
+      title: this.$t("weatherInfo.cloudiness"),
+      value: this.cloudiness,
+      unit: "%",
+    },
+  ];
 
   get weatherIconURL(): string {
     return `http://openweathermap.org/img/wn/${this.icon}@4x.png`;
