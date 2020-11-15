@@ -1,13 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col align="center" cols="12">
-      <span class="display-2">{{ $t(dates.dayTranslation) }}</span>
-    </v-col>
-    <v-col align="center" cols="12">
-      <span class="subtitle-2 date">
-        {{ $t(dates.monthTranslation) }} {{ dates.dateOfMonth }} |
-        {{ weather.name }}
-      </span>
+      <LocationInfo :city="weather.name" />
     </v-col>
     <v-col>
       <v-row align-content="end">
@@ -23,14 +17,22 @@
       </v-row>
     </v-col>
     <v-col align="center" cols="12">
-      <v-icon style="font-size: 15rem">mdi-weather-cloudy</v-icon>
+      <WeatherInfo
+        :icon="weather.weather[0].icon"
+        :description="weather.weather[0].description"
+        :feels-like="weather.main.feels_like"
+        :humidity="weather.main.humidity"
+        :pressure="weather.main.pressure"
+        :wind-speed="weather.wind.speed"
+        :wind-deg="weather.wind.deg"
+        :cloudiness="weather.clouds.all"
+      />
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
-import { Dates } from "@/logic/dates";
 import { Weather } from "@/interfaces/Weather";
 
 interface SingleTempBox {
@@ -41,7 +43,6 @@ interface SingleTempBox {
 @Component
 export default class WeatherView extends Vue {
   @Prop({ required: true }) weather!: Weather;
-  dates = new Dates("days", "months");
   tempBoxes: Array<SingleTempBox> = [
     {
       key: "temp_min",

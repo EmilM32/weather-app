@@ -7,12 +7,27 @@ export class WeatherData {
     "https://api.openweathermap.org/data/2.5/weather?";
 
   async downloadData(coords: Coords) {
-    const url = `lat=${coords.lat}&lon=${coords.lon}&lang=pl&units=metric&appid=${this.apiKey}`;
     try {
-      const data: Weather = await $axios.$get(`${this.openWeatherMap}${url}`);
+      let data = await $axios.$get(
+        `${this.openWeatherMap}${this.url(coords, "pl")}`
+      );
+      let enDesc = await $axios.$get(
+        `${this.openWeatherMap}${this.url(coords, "en")}`
+      );
+      enDesc = enDesc.weather[0].description;
+
+      data.weather[0].description = {
+        pl: data.weather[0].description,
+        en: enDesc
+      };
+
       return data;
     } catch (e) {
       throw new Error(e);
     }
+  }
+
+  url(coords: Coords, lang: string): string {
+    return `lat=${coords.lat}&lon=${coords.lon}&lang=${lang}&units=metric&appid=${this.apiKey}`;
   }
 }

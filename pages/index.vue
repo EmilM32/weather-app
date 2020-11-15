@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center">
-    <WeatherView :weather="weather" />
+    <WeatherView :weather="weather" v-if="weather.weather.length" />
   </div>
 </template>
 
@@ -19,8 +19,8 @@ import { mapGetters } from "vuex";
 })
 export default class Main extends Vue {
   [x: string]: any;
-  weatherData = new WeatherData();
 
+  weatherData = new WeatherData();
   weather!: Weather;
 
   @Watch("$geolocation.coords", { immediate: true, deep: true })
@@ -37,7 +37,6 @@ export default class Main extends Vue {
 
   async getWeather(coords: Coords): Promise<void> {
     const weather = await this.weatherData.downloadData(coords);
-
     this.$store.commit("weather/insertWeatherData", weather);
   }
 }

@@ -21,5 +21,12 @@
     "OCT": "Październik",
     "NOV": "Listopad",
     "DEC": "Grudzień"
+  },
+  "weatherInfo": {
+    "feelsLike": "odczuwalna",
+    "humidity": "wilgotność",
+    "pressure": "ciśnienie",
+    "wind": "wiart",
+    "cloudiness": "zachmurzenie"
   }
 }

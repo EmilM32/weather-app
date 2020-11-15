@@ -21,5 +21,12 @@
     "OCT": "October",
     "NOV": "November",
     "DEC": "December"
+  },
+  "weatherInfo": {
+    "feelsLike": "feels like",
+    "humidity": "humidity",
+    "pressure": "pressure",
+    "wind": "wind",
+    "cloudiness": "cloudiness"
   }
 }
