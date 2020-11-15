@@ -1,7 +1,9 @@
 <template>
   <v-row justify="center">
     <v-col cols="2" align="end">
-      {{ sunrise.hour }}:{{ sunrise.minute }}
+      <span class="font-weight-bold">
+        {{ sunrise.hour }}:{{ sunrise.minute }}
+      </span>
       <v-icon x-large>mdi-weather-sunset-up</v-icon>
     </v-col>
     <v-col cols="8">
@@ -15,8 +17,10 @@
       />
     </v-col>
     <v-col cols="2">
-      <v-icon x-large>mdi-weather-sunset-down</v-icon> {{ sunset.hour }} :
-      {{ sunset.minute }}
+      <v-icon x-large>mdi-weather-sunset-down</v-icon>
+      <span class="font-weight-bold">
+        {{ sunset.hour }}:{{ sunset.minute }}
+      </span>
     </v-col>
   </v-row>
 </template>
