@@ -28,6 +28,12 @@
         :cloudiness="weather.clouds.all"
       />
     </v-col>
+    <v-col cols='12'>
+      <SunInfo
+        :sunrise-unix="weather.sys.sunrise"
+        :sunset-unix="weather.sys.sunset"
+      />
+    </v-col>
   </v-row>
 </template>
 
