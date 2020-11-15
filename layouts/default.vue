@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
-    <v-container fluid>
-      <Header />
+    <Header />
+    <v-container fluid fill-height>
       <v-row align="center" justify="center">
         <v-spacer />
         <v-col cols="8">

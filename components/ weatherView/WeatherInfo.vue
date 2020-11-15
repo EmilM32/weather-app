@@ -39,7 +39,7 @@ export default class WeatherInfo extends Vue {
   weatherInfo: Array<SingleWeatherInfo> = [
     {
       title: this.$t("weatherInfo.feelsLike"),
-      value: this.feelsLike,
+      value: parseFloat(this.feelsLike.toFixed(1)),
       icon: "mdi-temperature-celsius",
     },
     {

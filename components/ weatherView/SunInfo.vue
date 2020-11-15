@@ -40,6 +40,7 @@ interface SunInfoTemplate {
   sunrise: SunData;
   getHoursMinutes(unixTime: number): SunData;
   sliderValue(unitTime: number): number;
+  sliderModel: number;
 }
 
 @Component
