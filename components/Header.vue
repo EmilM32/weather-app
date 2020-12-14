@@ -5,7 +5,13 @@
     </v-btn>
     <v-spacer />
       <v-row no-gutters v-show="cityInput">
-        <v-text-field v-model="city" dense class="shrink" @keyup.enter="searchCity"/>
+        <v-text-field
+          v-model="city"
+          dense
+          class="shrink"
+          @keyup.enter="searchCity"
+          autofocus
+        />
         <v-btn icon @click="searchCity">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
