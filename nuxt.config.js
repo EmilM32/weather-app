@@ -22,7 +22,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
-    "@nuxtjs/vuetify",
+    ["@nuxtjs/vuetify", {treeShake: true}],
     "@nuxtjs/dotenv"
   ],
 
@@ -38,16 +38,19 @@ export default {
   },
 
   env: {
-    API_KEY: process.env.API_KEY
+    API_KEY: process.env.API_KEY,
+    appTitle: "Weather App"
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend(config, { isClient }) {
+      if (isClient) {
+        config.optimization.splitChunks.maxSize = 100000
+      }
+    },
+    extractCSS: true,
     analyze: true
-  },
-
-  env: {
-    appTitle: "Weather App"
   },
 
   i18n: {
