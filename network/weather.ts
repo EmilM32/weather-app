@@ -1,5 +1,6 @@
 import { Coords, Weather } from "~/interfaces/Weather";
 import { $axios } from "~/utils/api";
+import { camelizeKeys } from 'humps';
 
 export class WeatherData {
   private readonly apiKey = "493f1ca161dbe3d505b2941cb4166dfc";
@@ -21,7 +22,7 @@ export class WeatherData {
         en: enDesc
       };
 
-      return data;
+      return camelizeKeys(data);
     } catch (e) {
       throw new Error(e);
     }

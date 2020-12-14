@@ -15,12 +15,12 @@ export default class WeatherStore extends VuexModule {
     dt: 0,
     id: 0,
     main: {
-      feels_like: 0,
+      feelsLike: 0,
       humidity: 0,
       pressure: 0,
       temp: 0,
-      temp_max: 0,
-      temp_min: 0
+      tempMax: 0,
+      tempMin: 0
     },
     name: "",
     sys: {

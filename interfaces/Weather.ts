@@ -4,12 +4,12 @@ export interface Coords {
 }
 
 interface WeatherMain {
-  feels_like: number;
+  feelsLike: number;
   humidity: number;
   pressure: number;
   temp: number;
-  temp_max: number;
-  temp_min: number;
+  tempMax: number;
+  tempMin: number;
 }
 
 interface SysInfo {

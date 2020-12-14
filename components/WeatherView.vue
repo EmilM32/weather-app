@@ -20,7 +20,7 @@
       <WeatherInfo
         :icon="weather.weather[0].icon"
         :description="weather.weather[0].description"
-        :feels-like="weather.main.feels_like"
+        :feels-like="weather.main.feelsLike"
         :humidity="weather.main.humidity"
         :pressure="weather.main.pressure"
         :wind-speed="weather.wind.speed"
@@ -51,14 +51,14 @@ export default class WeatherView extends Vue {
   @Prop({ required: true }) weather!: Weather;
   tempBoxes: Array<SingleTempBox> = [
     {
-      key: "temp_min",
+      key: "tempMin",
       title: "MIN",
     },
     {
       key: "temp",
     },
     {
-      key: "temp_max",
+      key: "tempMax",
       title: "MAX",
     },
   ];
