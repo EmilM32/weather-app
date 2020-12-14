@@ -4,7 +4,7 @@
     <v-container fluid fill-height>
       <v-row align="center" justify="center">
         <v-spacer />
-        <v-col cols="8">
+        <v-col cols="11" md="8">
           <Nuxt />
         </v-col>
         <v-spacer />

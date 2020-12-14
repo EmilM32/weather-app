@@ -3,7 +3,7 @@
     <v-col align="center" cols="12">
       <LocationInfo :city="weather.name" />
     </v-col>
-    <v-col>
+    <v-col cols="12">
       <v-row align-content="end">
         <v-spacer />
         <TempBox

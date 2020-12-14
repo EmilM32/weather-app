@@ -31,5 +31,9 @@
   },
   "snackbar": {
     "wrongLocationData": "Błędne dane lokalizacji"
+  },
+  "form": {
+    "required": "Pole obowiązkowe",
+    "city": "Znajdź miasto"
   }
 }

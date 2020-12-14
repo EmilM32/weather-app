@@ -5,7 +5,12 @@
       {{ description[$i18n.locale] }}
     </SpanBlock>
     <v-row class="my-5">
-      <v-col v-for="data in weatherInfo" :key="data.title">
+      <v-col
+        cols="12"
+        md=""
+        v-for="data in weatherInfo"
+        :key="data.title"
+      >
         <WeatherInfoSingle
           :title="data.title"
           :value="data.value"
