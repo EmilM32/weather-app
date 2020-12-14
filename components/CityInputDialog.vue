@@ -7,8 +7,6 @@
         <v-text-field
           v-model="city"
           outlined
-          @keyup.enter="searchCity"
-          @keyup.esc="$emit('input', false)"
           autofocus
           required
           :rules="[(val) => !!val || $t('form.required')]"
