@@ -12,9 +12,6 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
-
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ["~/plugins/axios-accessor.ts"],
 
@@ -25,7 +22,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
-    "@nuxtjs/vuetify"
+    "@nuxtjs/vuetify",
+    "@nuxtjs/dotenv"
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -39,11 +37,14 @@ export default {
     watch: true
   },
 
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  env: {
+    API_KEY: process.env.API_KEY
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    analyze: true
+  },
 
   env: {
     appTitle: "Weather App"
@@ -66,43 +67,11 @@ export default {
         options: {
           customProperties: true
         },
-        light: {
-          primary: colors.purple,
-          secondary: colors.grey.darken1,
-          accent: colors.shades.black,
-          error: colors.red.accent3
-        },
         dark: {
           primary: colors.blue.lighten3,
           background: "#7cadb2"
         }
       }
     }
-    // theme: {
-    //   // default theme is light mode
-    //   dark: true,
-    //   themes: {
-    //     dark: {
-    //       primary: colors.blue,
-    //       secondary: colors.teal.darken4,
-    //       accent: colors.teal.accent4,
-
-    //       error: colors.deepOrange.accent2,
-    //       info: colors.grey.darken3,
-    //       success: colors.green.accent3,
-    //       warning: colors.amber.base,
-    //     },
-    //     light: {
-    //       primary: '#1976D2',
-    //       secondary: colors.teal.lighten3,
-    //       accent: colors.teal.accent4,
-
-    //       error: '#FF5252',
-    //       info: '#2196F3',
-    //       success: '#4CAF50',
-    //       warning: '#FFC107',
-    //     }
-    //   }
-    // }
   }
 };

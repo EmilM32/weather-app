@@ -3,7 +3,7 @@ import { $axios } from "@/utils/api";
 import { camelizeKeys } from "humps";
 
 export class WeatherData {
-  private readonly apiKey = "493f1ca161dbe3d505b2941cb4166dfc";
+  private readonly apiKey = process.env.API_KEY;
   private readonly openWeatherMap =
     "https://api.openweathermap.org/data/2.5/weather?";
 
@@ -30,7 +30,6 @@ export class WeatherData {
 
       return returnData as Weather;
     } catch {
-      // throw new Error(e);
       return false
     }
   }
