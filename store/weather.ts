@@ -1,5 +1,5 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators";
-import { Weather } from "@/interfaces/Weather";
+import { Coords, Weather } from "@/interfaces/Weather";
 
 @Module({
   name: "weather",
@@ -35,13 +35,26 @@ export default class WeatherStore extends VuexModule {
     weather: [],
     wind: { deg: 0, speed: 0 }
   };
+  private coords: Coords = {
+    lat: 0,
+    lon: 0
+  };
 
   @Mutation
   insertWeatherData(payload: Weather): void {
     this.data = payload;
   }
 
+  @Mutation
+  insertUserCoords(payload: Coords): void {
+    this.coords = payload;
+  }
+
   get weatherData(): Weather {
     return this.data;
+  }
+
+  get userCoords(): Coords {
+    return this.coords;
   }
 }

@@ -30,6 +30,7 @@ export default class Main extends Vue {
         lat: this.$geolocation.coords.latitude,
         lon: this.$geolocation.coords.longitude,
       };
+      this.$store.commit("weather/insertUserCoords", userCoords);
 
       if (!this.weather.weather.length) this.getWeather(userCoords);
     }

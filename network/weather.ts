@@ -7,14 +7,19 @@ export class WeatherData {
   private readonly openWeatherMap =
     "https://api.openweathermap.org/data/2.5/weather?";
 
-  async downloadData(coords: Coords): Promise<Weather> {
+  async downloadData(coords?: Coords, city?: string): Promise<Weather> {
     try {
-      let data = await $axios.$get(
-        `${this.openWeatherMap}${this.url(coords, "pl")}`
-      );
-      let enDesc = await $axios.$get(
-        `${this.openWeatherMap}${this.url(coords, "en")}`
-      );
+      let urlPl
+      let urlEn
+      if (coords) {
+        urlPl = `${this.openWeatherMap}${this.url("pl", coords)}`
+        urlEn = `${this.openWeatherMap}${this.url("en", coords)}`
+      } else {
+        urlPl = `${this.openWeatherMap}${this.url("pl", undefined, city)}`
+        urlEn = `${this.openWeatherMap}${this.url("en", undefined, city)}`
+      }
+      let data = await $axios.$get(urlPl);
+      let enDesc = await $axios.$get(urlEn);
       enDesc = enDesc.weather[0].description;
 
       data.weather[0].description = {
@@ -29,7 +34,11 @@ export class WeatherData {
     }
   }
 
-  url(coords: Coords, lang: string): string {
-    return `lat=${coords.lat}&lon=${coords.lon}&lang=${lang}&units=metric&appid=${this.apiKey}`;
+  url(lang: string, coords?: Coords, city?: string): string {
+    if (coords) {
+      return `lat=${coords.lat}&lon=${coords.lon}&lang=${lang}&units=metric&appid=${this.apiKey}`;
+    } else {
+      return `q=${city}&lang=${lang}&units=metric&appid=${this.apiKey}`;
+    }
   }
 }
