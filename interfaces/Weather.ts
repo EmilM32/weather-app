@@ -1,3 +1,5 @@
+import { SnackbarType } from "@/enums";
+
 export interface Coords {
   lat: number;
   lon: number;

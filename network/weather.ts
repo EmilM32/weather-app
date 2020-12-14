@@ -1,5 +1,5 @@
-import { Coords, Weather } from "~/interfaces/Weather";
-import { $axios } from "~/utils/api";
+import { Coords, Weather } from "@/interfaces/Weather";
+import { $axios } from "@/utils/api";
 import { camelizeKeys } from "humps";
 
 export class WeatherData {
@@ -7,17 +7,17 @@ export class WeatherData {
   private readonly openWeatherMap =
     "https://api.openweathermap.org/data/2.5/weather?";
 
-  async downloadData(coords?: Coords, city?: string): Promise<Weather> {
+  async downloadData(coords?: Coords, city?: string): Promise<Weather | boolean> {
+    let urlPl
+    let urlEn
+    if (coords) {
+      urlPl = `${this.openWeatherMap}${this.url("pl", coords)}`
+      urlEn = `${this.openWeatherMap}${this.url("en", coords)}`
+    } else {
+      urlPl = `${this.openWeatherMap}${this.url("pl", undefined, city)}`
+      urlEn = `${this.openWeatherMap}${this.url("en", undefined, city)}`
+    }
     try {
-      let urlPl
-      let urlEn
-      if (coords) {
-        urlPl = `${this.openWeatherMap}${this.url("pl", coords)}`
-        urlEn = `${this.openWeatherMap}${this.url("en", coords)}`
-      } else {
-        urlPl = `${this.openWeatherMap}${this.url("pl", undefined, city)}`
-        urlEn = `${this.openWeatherMap}${this.url("en", undefined, city)}`
-      }
       let data = await $axios.$get(urlPl);
       let enDesc = await $axios.$get(urlEn);
       enDesc = enDesc.weather[0].description;
@@ -29,8 +29,9 @@ export class WeatherData {
       const returnData = camelizeKeys(data) as unknown;
 
       return returnData as Weather;
-    } catch (e) {
-      throw new Error(e);
+    } catch {
+      // throw new Error(e);
+      return false
     }
   }
 

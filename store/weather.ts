@@ -1,5 +1,7 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators";
 import { Coords, Weather } from "@/interfaces/Weather";
+import { Snackbar } from "@/interfaces";
+import { SnackbarType } from "@/enums";
 
 @Module({
   name: "weather",
@@ -39,15 +41,30 @@ export default class WeatherStore extends VuexModule {
     lat: 0,
     lon: 0
   };
+  private snackbarData: Snackbar = {
+    type: SnackbarType.SUCCESS,
+    text: ""
+  };
 
   @Mutation
-  insertWeatherData(payload: Weather): void {
-    this.data = payload;
+  insertWeatherData(payload: Weather | boolean): void {
+    if (typeof(payload) === 'boolean') {
+      this.snackbarData = {
+        type: SnackbarType.ERROR,
+        text: "snackbar.wrongLocationData"
+      };
+    } else {
+      this.data = payload;
+    }
   }
-
+  
   @Mutation
   insertUserCoords(payload: Coords): void {
     this.coords = payload;
+  }
+  
+  get snackbar(): Snackbar {
+    return this.snackbarData
   }
 
   get weatherData(): Weather {

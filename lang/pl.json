@@ -28,5 +28,8 @@
     "pressure": "ciśnienie",
     "wind": "wiart",
     "cloudiness": "zachmurzenie"
+  },
+  "snackbar": {
+    "wrongLocationData": "Błędne dane lokalizacji"
   }
 }

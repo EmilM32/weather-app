@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex justify-center">
     <WeatherView :weather="weather" v-if="weather.weather.length" />
+    <base-snackbar />
   </div>
 </template>
 
