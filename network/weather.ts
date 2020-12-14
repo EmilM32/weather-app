@@ -1,13 +1,13 @@
 import { Coords, Weather } from "~/interfaces/Weather";
 import { $axios } from "~/utils/api";
-import { camelizeKeys } from 'humps';
+import { camelizeKeys } from "humps";
 
 export class WeatherData {
   private readonly apiKey = "493f1ca161dbe3d505b2941cb4166dfc";
   private readonly openWeatherMap =
     "https://api.openweathermap.org/data/2.5/weather?";
 
-  async downloadData(coords: Coords) {
+  async downloadData(coords: Coords): Promise<Weather> {
     try {
       let data = await $axios.$get(
         `${this.openWeatherMap}${this.url(coords, "pl")}`
@@ -21,8 +21,9 @@ export class WeatherData {
         pl: data.weather[0].description,
         en: enDesc
       };
+      const returnData = camelizeKeys(data) as unknown;
 
-      return camelizeKeys(data);
+      return returnData as Weather;
     } catch (e) {
       throw new Error(e);
     }
