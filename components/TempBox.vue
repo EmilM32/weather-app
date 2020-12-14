@@ -17,7 +17,6 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
 
-// TODO mobile
 @Component
 export default class TempBox extends Vue {
   @Prop() readonly temperature!: number;

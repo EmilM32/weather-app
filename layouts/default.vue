@@ -14,7 +14,6 @@
 </template>
 <style>
 body {
-  /* background-color: #7cadb2 !important; */
   background-image: linear-gradient(to bottom right, #527b92, #83bbba);
 }
 #app {

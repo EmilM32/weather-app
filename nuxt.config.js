@@ -49,8 +49,7 @@ export default {
         config.optimization.splitChunks.maxSize = 100000
       }
     },
-    extractCSS: true,
-    analyze: true
+    extractCSS: true
   },
 
   i18n: {

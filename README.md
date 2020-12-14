@@ -3,12 +3,9 @@
 - Programming language: TypeScript
 - Package manager: Npm
 - UI framework: Vuetify
-- Nuxt.js modules: Axios
-- Testing framework: Jest
 - Rendering mode: Universal (SSR / SSG)
 - Deployment target: Server (Node.js hosting)
 
-- [UI inspiration](https://dribbble.com/shots/6523583-Weather-widget-post-metro-ui-variation)
 ## Build Setup
 
 ```bash
@@ -26,4 +23,10 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## env
+To run app you need to add api key to [OpenWeatherMap](https://openweathermap.org/).
+
+Add `.env` file in root directory (at the same level as `nuxt.config.js`) and paste there `API_KEY`.
+```
+API_KEY=YOUR_API_KEY_HERE
+```
