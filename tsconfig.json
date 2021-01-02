@@ -28,6 +28,7 @@
       "@nuxt/types",
       "vuetify",
       "nuxt-i18n",
+      "vue-geolocation-api"
     ]
   },
   "exclude": [

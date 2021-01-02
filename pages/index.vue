@@ -19,8 +19,6 @@ import { mapGetters } from "vuex";
   },
 })
 export default class Main extends Vue {
-  $geolocation: any;
-
   weatherData = new WeatherData();
   weather!: Weather;
 

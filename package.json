@@ -17,7 +17,7 @@
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.15.4",
     "nuxt-property-decorator": "^2.8.8",
-    "vue-geolocation-api": "^0.1.17",
+    "vue-geolocation-api": "^0.1.21",
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
